@@ -67,8 +67,8 @@ __ctm-sel-js__
 
 ```js
 function selectInit(){
-	\$('.selectpicker').each(function(){
-		var self = \$(this);
+	$('.selectpicker').each(function(){
+		var self = $(this);
 		var selectStyle = self.attr('data-class');//additional style attribute, not required
 		self.selectpicker({
 		     style: 'cst-select ' + selectStyle //add classes to customize select field
@@ -111,13 +111,13 @@ function wpc_add_img_bg( img_sel, parent_sel){
       return false;
     }
 
-    var \$parent, _this;
+    var $parent, _this;
 
-    \$(img_sel).each(function(){
-      _this = \$(this);
-      \$parent = _this.closest( parent_sel );
-      \$parent = \$parent.length ? \$parent : _this.parent();
-      \$parent.css( 'background-image' , 'url(' + this.src + ')' );
+    $(img_sel).each(function(){
+      _this = $(this);
+      $parent = _this.closest( parent_sel );
+      $parent = $parent.length ? $parent : _this.parent();
+      $parent.css( 'background-image' , 'url(' + this.src + ')' );
       _this.hide()
     });
 
