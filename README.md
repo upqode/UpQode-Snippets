@@ -145,3 +145,10 @@ __wp-pag__
 	<a class="next page-numbers" href="#">Следующая страница</a>
 </div>
 ```
+
+__mmxw__
+```css
+@media screen and (max-width: $1px) {
+
+}
+```
