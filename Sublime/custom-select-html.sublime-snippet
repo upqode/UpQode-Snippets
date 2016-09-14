@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/bootstrap-select.min.css" rel="stylesheet" type="text/css">
+
+<div class="wpc-select">
+     <select class="selectpicker" data-size="false" data-width="100%" data-class="select-1">
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+     </select>
+</div>
+
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-select.min.js"></script>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ctm-sel-html</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.html</scope> -->
+</snippet>

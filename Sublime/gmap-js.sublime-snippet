@@ -1,0 +1,74 @@
+<snippet>
+	<content><![CDATA[
+if( \$('.wpc-map').length ) {
+	\$('.wpc-map').each(function() {
+		initialize(this);
+	});
+}
+
+function initialize(_this) {
+		
+	var stylesArray = {
+		//style 1
+		'style-1' : [{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}]
+	};
+
+	var styles ,map, marker, infowindow,
+		lat = \$(_this).attr("data-lat"),
+   		lng = \$(_this).attr("data-lng"),
+		contentString = \$(_this).attr("data-string"),
+		image = \$(_this).attr("data-marker"),
+		styles_attr = \$(_this).attr("data-style"),
+		zoomLevel = parseInt(\$(_this).attr("data-zoom"),10),
+		myLatlng = new google.maps.LatLng(lat,lng);
+		
+
+	// style_1
+	if (styles_attr == 'style-1') {
+		styles = stylesArray[styles_attr];
+	}
+	// custom
+	if (typeof hawa_style_map != 'undefined' && styles_attr == 'custom') {
+		styles = style_map;
+	}
+	// or default style
+	
+	var styledMap = new google.maps.StyledMapType(styles,{name: "Styled Map"});
+    
+	var mapOptions = {
+		zoom: zoomLevel,
+		disableDefaultUI: true,
+		center: myLatlng,
+        scrollwheel: false,
+		mapTypeControlOptions: {
+        mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+		}
+	};
+	
+	map = new google.maps.Map(_this, mapOptions);
+
+	map.mapTypes.set('map_style', styledMap);
+	map.setMapTypeId('map_style');
+
+	infowindow = new google.maps.InfoWindow({
+		content: contentString
+	});
+  
+    
+    marker = new google.maps.Marker({
+		position: myLatlng,
+		map: map,
+		icon: image
+	});
+
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.open(map,marker);
+	});
+
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>gmap-js</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.html</scope> -->
+</snippet>

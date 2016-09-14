@@ -1,0 +1,28 @@
+<snippet>
+	<content><![CDATA[
+function wpc_add_img_bg( img_sel, parent_sel){
+    
+    if (!img_sel) {
+      console.info('no img selector');
+      return false;
+    }
+
+    var \$parent, _this;
+
+    \$(img_sel).each(function(){
+      _this = \$(this);
+      \$parent = _this.closest( parent_sel );
+      \$parent = \$parent.length ? \$parent : _this.parent();
+      \$parent.css( 'background-image' , 'url(' + this.src + ')' );
+      _this.hide()
+    });
+
+  }
+
+wpc_add_img_bg('.bg_img');
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>img-to-bg</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.html</scope> -->
+</snippet>

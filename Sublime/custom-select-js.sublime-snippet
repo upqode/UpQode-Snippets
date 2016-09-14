@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+function selectInit(){
+	\$('.selectpicker').each(function(){
+		var self = \$(this);
+		var selectStyle = self.attr('data-class');//additional style attribute, not required
+		self.selectpicker({
+		     style: 'cst-select ' + selectStyle //add classes to customize select field
+	        });
+	});
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ctm-sel-js</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.html</scope> -->
+</snippet>

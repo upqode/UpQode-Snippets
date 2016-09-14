@@ -1,0 +1,174 @@
+<snippet>
+	<content><![CDATA[
+.wpc-navigation {
+	position: relative;
+	min-height: 40px;
+}
+
+.main-menu{
+	padding: 2px 10px;
+    margin: 0;
+}
+
+.main-menu li{
+	display: inline-block;
+	margin-right: 5px;
+	padding-right: 5px;
+	position: relative;
+}
+
+.main-menu .sub-menu{
+	display: none;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+}
+
+/* Active menu items */
+.main-menu .current-menu-parent a,
+.main-menu .current-menu-item a{
+	color: #000;
+}
+
+/* Show second and third menu levels */
+@media screen and (min-width:768px) {
+
+	.main-menu .sub-menu li{
+		display: block;
+	}
+
+	.main-menu li:hover > .sub-menu{
+		display: block;
+	}
+
+	.main-menu .sub-menu .sub-menu{
+		position: absolute;
+		left: 100%;
+		top: 0;
+	}
+
+	/* First level menu arrows */
+	.main-menu > .menu-item-has-children > a:after {
+		content: '\f107';
+		font-family: 'FontAwesome';
+	}
+
+	/* Second level menu arrows */
+	.main-menu .sub-menu .menu-item-has-children > a:after{
+		content: '\f105';
+		font-family:'FontAwesome';
+	}	
+}
+
+
+/* Responsive menu button */
+.nav-menu-icon {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 32px;
+	height: 32px;
+	display: none;
+	cursor: pointer;	
+}
+
+/* Don`t reqiured */
+.wpc-navigation.active .nav-menu-icon i{
+	background: none;
+}
+.wpc-navigation.active .nav-menu-icon i:before{
+	top: 0;
+	-webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.wpc-navigation.active .nav-menu-icon i:after{
+	top: 0;
+	-webkit-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+/* End Don`t reqiured */
+
+.nav-menu-icon i:before, .nav-menu-icon i:after {
+    content: '';
+    width: 32px;
+    height: 2px;
+    background: #000;
+    position: absolute;
+    left: 0;
+    -moz-transition: all 0.15s ease-out;
+    -o-transition: all 0.15s ease-out;
+    -webkit-transition: all 0.15s ease-out;
+    transition: all 0.15s ease-out;
+    -ms-transition: all 0.15s ease-out;
+}
+
+.nav-menu-icon i:before {
+    top: -7px;
+}
+
+.nav-menu-icon i:after {
+    bottom: -7px;
+}
+
+.nav-menu-icon i {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 2px;
+    background: #000;
+}
+
+.menu-item-has-children > a span{
+	display: none;
+}
+
+/* Responsive menu */
+@media screen and (max-width:768px) {
+	.nav-menu-icon {
+		display: block;
+	}
+
+	.main-menu {
+		display: none;
+	}
+
+	.wpc-navigation.active .main-menu{
+		display: block;
+		width: 100%;
+		background-color: #fff;
+		padding: 0;
+		height: auto;
+	}
+
+	.main-menu li{
+		display: block;
+	}
+
+	.main-menu .sub-menu{
+		position: static;
+		padding: 5px 15px;
+	}
+	
+
+	.menu-item-has-children > a span{
+		display: inline-block;
+	}
+	
+	.menu-item-has-children.active > .sub-menu{
+		display: block;
+		position: static;
+	}
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>wp-menu-css</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.html</scope> -->
+</snippet>

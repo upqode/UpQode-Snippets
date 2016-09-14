@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+<script src="http://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+<!--
+data-style="custom"
+-->
+<div 
+  class="wpc-map" 
+  data-lat="40.7143528" 
+  data-lng="-74.0059731"  
+  data-marker="img/theme-1/marker.png" 
+  data-zoom="10" 
+  data-style="style-1"
+  data-string="WPC string",
+></div>
+<script>var style_map = "insert code from snazzymaps.com (only custom style)"</script>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>gmap-html</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.html</scope> -->
+</snippet>

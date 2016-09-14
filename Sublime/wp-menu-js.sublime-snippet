@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+;(function(\$, window, document, undefined) {
+    "use strict";
+
+    var \$first_child_link = \$('.menu-item-has-children > a').append('<span class="fa fa-angle-down"></span>');
+
+    \$('.nav-menu-icon').click(function(e) {
+        \$(this).toggleClass('active');
+        \$('.wpc-navigation').toggleClass('active');
+    });
+
+    \$first_child_link.find('span').click(function(e) {
+        \$(this).closest('li').toggleClass('active');
+    });
+
+})(jQuery, window, document);
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>wp-menu-js</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.html</scope> -->
+</snippet>
