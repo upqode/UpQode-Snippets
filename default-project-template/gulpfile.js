@@ -93,20 +93,15 @@ gulp.task('svg-o', function () {
 gulp.task('svgstore', function () {
   return gulp
     .src('src/svg/sprite/*.svg')
-    .pipe(svgmin({
-      js2svg: {
-        pretty: true
-      },
-      {
-        removeDoctype: false
-      }
-    }))
     .pipe(svgstore())
     .pipe(svgmin({
         plugins: [{
             removeDoctype: true
           }
-        ]
+        ],
+        js2svg: {
+          pretty: true
+        }
     }))
     .pipe(gulp.dest('dist/img/'));
 });
