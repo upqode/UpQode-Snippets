@@ -104,26 +104,26 @@ http://upqode.com/projects/help/map/
 __img-to-bg__ - img tag to background property JS
 
 ```js
-function wpc_add_img_bg( img_sel, parent_sel){
+function changeImgToBg( imgSel, parentSel){
 
-    if (!img_sel) {
-      console.info('no img selector');
-      return false;
-    }
-
-    var $parent, _this;
-
-    $(img_sel).each(function(){
-      _this = $(this);
-      $parent = _this.closest( parent_sel );
-      $parent = $parent.length ? $parent : _this.parent();
-      $parent.css( 'background-image' , 'url(' + this.src + ')' );
-      _this.hide()
-    });
-
+  if (!imgSel) {
+    console.info('no img selector');
+    return false;
   }
 
-wpc_add_img_bg('.bg_img');
+  var $parent, _this;
+
+  $(imgSel).each(function(){
+    _this = $(this);
+    $parent = _this.closest( parentSel );
+    $parent = $parent.length ? $parent : _this.parent();
+    $parent.css( 'background-image' , 'url(' + this.src + ')' );
+    _this.hide()
+  });
+
+}
+
+changeImgToBg('.js-bg');
 ```
 
 __wp-menu-css__ - WordPress Standart Menu CSS
@@ -149,6 +149,6 @@ __wp-pag__ - WordPress Standart Pagination HTML
 __mmxw__
 ```css
 @media screen and (max-width: $1px) {
-  
+
 }
 ```
