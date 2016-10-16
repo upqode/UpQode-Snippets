@@ -1,8 +1,0 @@
-body {
-  display: block;
-  background: #fff url() 0 0 no-repeat;
-  .some-class {
-    display: inline-block;
-    background: #000;
-  }
-}
