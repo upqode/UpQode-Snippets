@@ -1,18 +1,24 @@
-@import "_mixins.scss";
-
 body {
   display: block;
-  @media (max-width: 600px) {
-    background-color: #ffffff;
-  }
 }
+
 .some-class {
   display: block;
-  @media (max-width: 768px) {
+}
+
+@media (max-width: 768px) {
+  .some-class {
     background-color: #fff;
     color: red;
   }
-  @media (max-width: 600px) {
+}
+
+@media (max-width: 600px) {
+  body {
+    background-color: #ffffff;
+  }
+
+  .some-class {
     background-color: #fff;
     color: red;
   }
