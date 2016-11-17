@@ -13,6 +13,7 @@ var svgstore = require('gulp-svgstore');
 var svgmin = require('gulp-svgmin');
 var autoprefixer = require('gulp-autoprefixer');
 var combineMq = require('gulp-combine-mq');
+var sourcemaps = require('gulp-sourcemaps');
 
 // 1.browserSync
 // 2.minify-js
@@ -35,12 +36,12 @@ gulp.task('browser-sync', function() {
 // uglify js
 gulp.task('minify-js', function (cb) {
   pump([
-        gulp.src('src/lib/*.js'),
-        uglify(),
-        rename({ suffix: '.min' }), //add .min suffix
-        gulp.dest('dist/js')
-    ],
-    cb
+    gulp.src('src/lib/*.js'),
+    uglify(),
+    rename({ suffix: '.min' }), //add .min suffix
+    gulp.dest('dist/js')
+  ],
+  cb
   );
 });
 
@@ -54,18 +55,20 @@ gulp.task('minify-css', function() {
 
 //sass
 gulp.task('sass', function () {
-    return gulp.src('./src/sass/style.scss')
-        .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-        .pipe(gulp.dest('./css'))
-        .pipe(autoprefixer({
-            browsers: ['> 1%', 'last 2 versions'],
-            cascade: true
-        }))
-        .pipe(combineMq({
-            beautify: true
-        }))
-        .pipe(gulp.dest('./dist/css'))
-        .pipe(browserSync.stream()); //inject css
+  return gulp.src('./src/sass/style.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+    .pipe(gulp.dest('./css'))
+    .pipe(autoprefixer({
+      browsers: ['> 1%', 'last 2 versions'],
+      cascade: true
+    }))
+    .pipe(combineMq({
+      beautify: true
+    }))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./dist/css'))
+    .pipe(browserSync.stream()); //inject css
 });
 
 //nunjucks template + htmlbeautify
@@ -84,28 +87,28 @@ gulp.task('svg-o', function () {
   return gulp
     .src('src/svg/*.svg')
     .pipe(svgmin({
-        js2svg: {
-            pretty: true
-        },
-        removeDoctype: false
+      js2svg: {
+        pretty: true
+      },
+      removeDoctype: false
     }))
     .pipe(gulp.dest('dist/img/'));
 });
 
 // svg sprite
 gulp.task('svgstore', function () {
-    return gulp
-        .src('src/svg/sprite/*.svg')
-        .pipe(svgmin({
-            removeDoctype: false
-        }))
-        .pipe(svgstore())
-        .pipe(svgmin({
-            js2svg: {
-                pretty: true
-            }
-        }))
-        .pipe(gulp.dest('dist/img/'));
+  return gulp
+    .src('src/svg/sprite/*.svg')
+    .pipe(svgmin({
+      removeDoctype: false
+    }))
+    .pipe(svgstore())
+    .pipe(svgmin({
+      js2svg: {
+        pretty: true
+      }
+    }))
+    .pipe(gulp.dest('dist/img/'));
 });
 
 //watcher
