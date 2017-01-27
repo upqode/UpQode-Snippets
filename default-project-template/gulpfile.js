@@ -1,19 +1,24 @@
 var gulp = require('gulp');
-var sass = require('gulp-sass');
-var nunjucksRender = require('gulp-nunjucks-render');
-var plumber = require('gulp-plumber');
 var path = require('path');
 var browserSync = require('browser-sync').create();
+
+// need to nunjucks
+var nunjucksRender = require('gulp-nunjucks-render');
+var plumber = require('gulp-plumber');
 var htmlbeautify = require('gulp-html-beautify');
+
+// need to sass
+var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
+var sourcemaps = require('gulp-sourcemaps');
+var notify = require("gulp-notify");
+
 var uglify = require('gulp-uglify');
 var pump = require('pump');
 var rename = require("gulp-rename");
 var cleanCSS = require('gulp-clean-css');
 var svgstore = require('gulp-svgstore');
 var svgmin = require('gulp-svgmin');
-var autoprefixer = require('gulp-autoprefixer');
-var combineMq = require('gulp-combine-mq');
-var sourcemaps = require('gulp-sourcemaps');
 
 // 1.browserSync
 // 2.minify-js
@@ -57,14 +62,12 @@ gulp.task('minify-css', function() {
 gulp.task('sass', function () {
   return gulp.src('./src/sass/style.scss')
     .pipe(sourcemaps.init())
-    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
-    .pipe(gulp.dest('./css'))
+    .pipe(sass({outputStyle: 'expanded'}).on('error', function (err) {
+    	return notify().write(err);
+    }))
     .pipe(autoprefixer({
       browsers: ['> 1%', 'last 2 versions'],
       cascade: true
-    }))
-    .pipe(combineMq({
-      beautify: true
     }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('./dist/css'))
@@ -118,7 +121,7 @@ gulp.task('watch', function () {
       baseDir: "dist"
     }
   });
-	gulp.watch('src/sass/*.scss', ['sass']);
+  gulp.watch('src/sass/*.scss', ['sass']);
   gulp.watch(['src/pages/**/*.html', 'src/templates/**/*.html' ], ['nunjucks']);
   gulp.watch(['dist/js/*.js']).on('change', browserSync.reload);
   gulp.watch(['dist/*.html']).on('change', browserSync.reload);
