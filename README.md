@@ -4,15 +4,39 @@ Sublime Text HTML Snippets
 Install folder --> "c:\Users\USER_NAME\AppData\Roaming\Sublime Text 3\Packages\User\"
 ---
 
-## Style guide
+## Code style guide
 ### Javascript
+> Code style is based on https://standardjs.com/
 > npm install -g eslint standard
 >
 > Atom packages: linter, linter-eslint (enable option: 'Use global ESLint installation')
 >
 > Sublime packages: SublimeLinter SublimeLinter-contrib-eslint
+> To enable tooltips change "tooltips": true in SublimeLinter Settings
 >
 > WebStorm: [read more](https://github.com/feross/standard/blob/master/docs/webstorm.md)
+>
+> Restart IDE
+
+### Sass
+> Code style is based on https://google.github.io/styleguide/htmlcssguide.html
+> npm install -g sass-lint
+>
+> Atom packages: linter, linter-sass-lint
+>
+> Sublime packages: SublimeLinter SublimeLinter-contrib-sass-lint
+> To enable tooltips change "tooltips": true in SublimeLinter Settings
+>
+> Restart IDE
+
+### HTML
+> Code style is based on https://google.github.io/styleguide/htmlcssguide.html
+> npm install htmlhint -g
+>
+> Atom packages: linter, linter-htmlhint
+>
+> Sublime packages: SublimeLinter SublimeLinter-contrib-htmlhint
+> To enable tooltips change "tooltips": true in SublimeLinter Settings
 >
 > Restart IDE
 
