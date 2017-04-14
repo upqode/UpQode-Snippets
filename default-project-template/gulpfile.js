@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var path = require('path');
 var browserSync = require('browser-sync').create();
 
 // need to nunjucks
@@ -11,11 +10,11 @@ var htmlbeautify = require('gulp-html-beautify');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
-var notify = require("gulp-notify");
+var notify = require('gulp-notify');
 
 var uglify = require('gulp-uglify');
 var pump = require('pump');
-var rename = require("gulp-rename");
+var rename = require('gulp-rename');
 var cleanCSS = require('gulp-clean-css');
 var svgstore = require('gulp-svgstore');
 var svgmin = require('gulp-svgmin');
@@ -29,41 +28,39 @@ var svgmin = require('gulp-svgmin');
 // 7.svgstore
 // 8.watch
 
-//browserSync
+// browserSync
 gulp.task('browser-sync', function() {
   browserSync.init({
     server: {
-      baseDir: "./"
+      baseDir: './'
     }
   });
 });
 
 // uglify js
-gulp.task('minify-js', function (cb) {
+gulp.task('minify-js', function(next) {
   pump([
     gulp.src('src/lib/*.js'),
     uglify(),
-    rename({ suffix: '.min' }), //add .min suffix
+    rename({ suffix: '.min' }), // add .min suffix
     gulp.dest('dist/js')
-  ],
-  cb
-  );
+  ], next);
 });
 
 // minify css
 gulp.task('minify-css', function() {
   return gulp.src(['src/lib/*.css', '!src/lib/*.min.css'])
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(rename({ suffix: '.min' })) //add .min suffix
+    .pipe(rename({ suffix: '.min' })) // add .min suffix
     .pipe(gulp.dest('dist/css'));
 });
 
-//sass
-gulp.task('sass', function () {
+// sass
+gulp.task('sass', function() {
   return gulp.src('./src/sass/style.scss')
     .pipe(sourcemaps.init())
-    .pipe(sass({outputStyle: 'expanded'}).on('error', function (err) {
-    	return notify().write(err);
+    .pipe(sass({outputStyle: 'expanded'}).on('error', function(err) {
+      return notify().write(err);
     }))
     .pipe(autoprefixer({
       browsers: ['> 1%', 'last 2 versions'],
@@ -71,22 +68,22 @@ gulp.task('sass', function () {
     }))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('./dist/css'))
-    .pipe(browserSync.stream()); //inject css
+    .pipe(browserSync.stream()); // inject css
 });
 
-//nunjucks template + htmlbeautify
-gulp.task('nunjucks', function () {
+// nunjucks template + htmlbeautify
+gulp.task('nunjucks', function() {
   return gulp.src('src/pages/**/*.html')
     .pipe(plumber())
     .pipe(nunjucksRender({
       path: ['src/templates/']
     }))
-    .pipe(htmlbeautify({indentSize: 2})) //html beautify
+    .pipe(htmlbeautify({indentSize: 2})) // html beautify
     .pipe(gulp.dest('dist'));
 });
 
 // svg opimization
-gulp.task('svg-o', function () {
+gulp.task('svg-o', function() {
   return gulp
     .src('src/svg/*.svg')
     .pipe(svgmin({
@@ -99,7 +96,7 @@ gulp.task('svg-o', function () {
 });
 
 // svg sprite
-gulp.task('svgstore', function () {
+gulp.task('svgstore', function() {
   return gulp
     .src('src/svg/sprite/*.svg')
     .pipe(svgmin({
@@ -114,15 +111,15 @@ gulp.task('svgstore', function () {
     .pipe(gulp.dest('dist/img/'));
 });
 
-//watcher
-gulp.task('watch', function () {
+// watcher
+gulp.task('watch', function() {
   browserSync.init({
     server: {
-      baseDir: "dist"
+      baseDir: 'dist'
     }
   });
   gulp.watch('src/sass/*.scss', ['sass']);
-  gulp.watch(['src/pages/**/*.html', 'src/templates/**/*.html' ], ['nunjucks']);
+  gulp.watch(['src/pages/**/*.html', 'src/templates/**/*.html'], ['nunjucks']);
   gulp.watch(['dist/js/*.js']).on('change', browserSync.reload);
   gulp.watch(['dist/*.html']).on('change', browserSync.reload);
 });

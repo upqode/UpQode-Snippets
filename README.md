@@ -4,6 +4,19 @@ Sublime Text HTML Snippets
 Install folder --> "c:\Users\USER_NAME\AppData\Roaming\Sublime Text 3\Packages\User\"
 ---
 
+## Style guide
+### Javascript
+> npm install -g eslint standard
+>
+> Atom packages: linter, linter-eslint (enable option: 'Use global ESLint installation')
+>
+> Sublime packages: SublimeLinter SublimeLinter-contrib-eslint
+>
+> WebStorm: [read more](https://github.com/feross/standard/blob/master/docs/webstorm.md)
+>
+> Restart IDE
+
+
 __sw2html__ - Swiper 2 HTML
 
 ```html
