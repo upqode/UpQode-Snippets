@@ -1,0 +1,29 @@
+{
+  "extends": ["standard"],
+  "env": {
+    "browser": true,
+    "jquery": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "max-len": ["error", {
+      "code": 80,
+      "ignoreComments": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true
+    }],
+    "padded-blocks": "off",
+    "semi": ["error", "always"],
+    "space-before-function-paren": ["error", {
+      "named": "never",
+      "anonymous": "never",
+      "asyncArrow": "ignore"
+    }],
+    "no-multiple-empty-lines": ["error", {
+      "max": 2
+    }]
+  }
+}
