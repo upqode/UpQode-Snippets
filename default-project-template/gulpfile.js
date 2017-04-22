@@ -60,6 +60,7 @@ gulp.task('sass', function() {
   return gulp.src('./src/sass/style.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: 'expanded'}).on('error', function(err) {
+      this.emit('end');
       return notify().write(err);
     }))
     .pipe(autoprefixer({
@@ -78,8 +79,8 @@ gulp.task('nunjucks', function() {
     .pipe(nunjucksRender({
       path: ['src/templates/']
     }))
-    .pipe(prettify({"indent_size": 2})) //html beautify
-    .pipe(gulp.dest('dist')),
+    .pipe(prettify({'indent_size': 2})) // html beautify
+    .pipe(gulp.dest('dist'))
     .on('end', browserSync.reload);
 });
 
