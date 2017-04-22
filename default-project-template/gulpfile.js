@@ -4,7 +4,7 @@ var browserSync = require('browser-sync').create();
 // need to nunjucks
 var nunjucksRender = require('gulp-nunjucks-render');
 var plumber = require('gulp-plumber');
-var htmlbeautify = require('gulp-html-beautify');
+var prettify = require('gulp-jsbeautifier');
 
 // need to sass
 var sass = require('gulp-sass');
@@ -78,8 +78,9 @@ gulp.task('nunjucks', function() {
     .pipe(nunjucksRender({
       path: ['src/templates/']
     }))
-    .pipe(htmlbeautify({indentSize: 2})) // html beautify
-    .pipe(gulp.dest('dist'));
+    .pipe(prettify({"indent_size": 2})) //html beautify
+    .pipe(gulp.dest('dist')),
+    .on('end', browserSync.reload);
 });
 
 // svg opimization
@@ -121,5 +122,4 @@ gulp.task('watch', function() {
   gulp.watch('src/sass/*.scss', ['sass']);
   gulp.watch(['src/pages/**/*.html', 'src/templates/**/*.html'], ['nunjucks']);
   gulp.watch(['dist/js/*.js']).on('change', browserSync.reload);
-  gulp.watch(['dist/*.html']).on('change', browserSync.reload);
 });

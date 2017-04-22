@@ -9,3 +9,8 @@ bower_components
 files
 **.7z
 **.rar
+
+#Ignore for dev branch
+#dist/css/
+#dist/js/script.js
+#dist/*.html
