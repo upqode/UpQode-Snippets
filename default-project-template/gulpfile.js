@@ -98,18 +98,14 @@ gulp.task('svg-o', function() {
 });
 
 // svg sprite
-gulp.task('svgstore', function() {
+// TODO: Add pipe for beautify in dev and uglify in prod
+gulp.task('svg-sprite', function() {
   return gulp
     .src('src/svg/sprite/*.svg')
     .pipe(svgmin({
       removeDoctype: false
     }))
     .pipe(svgstore())
-    .pipe(svgmin({
-      js2svg: {
-        pretty: true
-      }
-    }))
     .pipe(gulp.dest('dist/img/'));
 });
 

@@ -7,7 +7,7 @@
   "attr-no-duplication": true,
   "title-require": true,
   "attr-lowercase": false,
-  "tag-self-close": true,
+  "tag-self-close": false,
   "spec-char-escape": true,
   "space-tab-mixed-disabled": "space",
   "id-class-ad-disabled": true,
