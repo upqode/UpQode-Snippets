@@ -27,6 +27,7 @@ var svgmin = require('gulp-svgmin');
 // 6.svg-o
 // 7.svgstore
 // 8.watch
+// 9.build
 
 // browserSync
 gulp.task('browser-sync', function() {
@@ -119,4 +120,9 @@ gulp.task('watch', function() {
   gulp.watch('src/sass/*.scss', ['sass']);
   gulp.watch(['src/pages/**/*.html', 'src/templates/**/*.html'], ['nunjucks']);
   gulp.watch(['dist/js/*.js']).on('change', browserSync.reload);
+});
+
+// build
+gulp.task('build', ['sass', 'nunjucks'], function() {
+  console.log('Building files');
 });
