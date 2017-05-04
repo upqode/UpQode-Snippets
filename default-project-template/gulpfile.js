@@ -33,8 +33,9 @@ var svgmin = require('gulp-svgmin');
 gulp.task('browser-sync', function() {
   browserSync.init({
     server: {
-      baseDir: './'
-    }
+      baseDir: 'dist'
+    },
+    ui: false
   });
 });
 
@@ -111,12 +112,7 @@ gulp.task('svg-sprite', function() {
 });
 
 // watcher
-gulp.task('watch', function() {
-  browserSync.init({
-    server: {
-      baseDir: 'dist'
-    }
-  });
+gulp.task('watch', ['browser-sync'], function() {
   gulp.watch('src/sass/*.scss', ['sass']);
   gulp.watch(['src/pages/**/*.html', 'src/templates/**/*.html'], ['nunjucks']);
   gulp.watch(['dist/js/*.js']).on('change', browserSync.reload);
