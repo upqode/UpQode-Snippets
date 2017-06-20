@@ -28,13 +28,15 @@ var svgmin = require('gulp-svgmin');
 // 6.svg-o
 // 7.svgstore
 // 8.watch
+// 9.build
 
 // browserSync
 gulp.task('browser-sync', function() {
   browserSync.init({
     server: {
-      baseDir: './'
-    }
+      baseDir: 'dist'
+    },
+    ui: false
   });
 });
 
@@ -128,5 +130,5 @@ gulp.task('watch', ['browser-sync'], function() {
 
 // build
 gulp.task('build', ['sass', 'nunjucks'], function() {
-  console.log('Building');
+  console.log('Building files');
 });
