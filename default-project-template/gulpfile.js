@@ -11,6 +11,7 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var notify = require('gulp-notify');
+var gulpif = require('gulp-if');
 
 var uglify = require('gulp-uglify');
 var pump = require('pump');
@@ -57,9 +58,14 @@ gulp.task('minify-css', function() {
 
 // sass
 gulp.task('sass', function() {
+  const isProd = process.argv[2] === 'build';
   return gulp.src('./src/sass/style.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass({outputStyle: 'expanded'}).on('error', function(err) {
+    .pipe(gulpif(!isProd, sourcemaps.init()))
+    .pipe(sass({
+      outputStyle: 'expanded',
+      includePaths: ['node_modules']
+    })
+    .on('error', function(err) {
       this.emit('end');
       return notify().write(err);
     }))
@@ -67,7 +73,7 @@ gulp.task('sass', function() {
       browsers: ['> 1%', 'last 2 versions'],
       cascade: true
     }))
-    .pipe(sourcemaps.write())
+    .pipe(gulpif(!isProd, sourcemaps.write()))
     .pipe(gulp.dest('./dist/css'))
     .pipe(browserSync.stream()); // inject css
 });
@@ -79,7 +85,11 @@ gulp.task('nunjucks', function() {
     .pipe(nunjucksRender({
       path: ['src/templates/']
     }))
-    .pipe(prettify({'indent_size': 2})) // html beautify
+    .pipe(prettify({
+      'indent_size': 2,
+      'preserve_newlines': true,
+      'max_preserve_newlines': 0
+    })) // html beautify
     .pipe(gulp.dest('dist'))
     .on('end', browserSync.reload);
 });
@@ -110,13 +120,13 @@ gulp.task('svg-sprite', function() {
 });
 
 // watcher
-gulp.task('watch', function() {
-  browserSync.init({
-    server: {
-      baseDir: 'dist'
-    }
-  });
-  gulp.watch('src/sass/*.scss', ['sass']);
-  gulp.watch(['src/pages/**/*.html', 'src/templates/**/*.html'], ['nunjucks']);
+gulp.task('watch', ['browser-sync'], function() {
+  gulp.watch('src/sass/**/*.scss', ['sass']);
+  gulp.watch(['src/pages/**/*.njk', 'src/templates/**/*.njk'], ['nunjucks']);
   gulp.watch(['dist/js/*.js']).on('change', browserSync.reload);
+});
+
+// build
+gulp.task('build', ['sass', 'nunjucks'], function() {
+  console.log('Building');
 });
